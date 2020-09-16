@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  form = new FormControl('');
+  Geldbetrag: {
+    betrag:	number,
+    währung: string;
+  };
+  constructor() {
   }
+  ngOnInit() {
 
+  }
+  sendData() {
+    this.form.setValue(this.Geldbetrag);
+    this.form.setValue(213);
+  }
 }

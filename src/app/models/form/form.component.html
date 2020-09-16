@@ -1,1 +1,16 @@
-<p>form works!</p>
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The input element</h1>
+
+<label>
+  Name:
+  <input type="number"  [formControl]="form">
+</label>
+<p>
+  Value: {{ form.value }}
+</p>
+</body>
+</html>
+
