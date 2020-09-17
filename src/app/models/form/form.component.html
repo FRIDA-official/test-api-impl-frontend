@@ -1,16 +1,184 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <body>
 
-<h1>The input element</h1>
+    <div class="container">
+      <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <table style="width:100%"  cellpadding="5" cellspacing="5">
+          <div class="form-group input-group-lg" style="width:100%">
+            <tr>
+            <td>
+              <h5>Art der Versicherung</h5>
+                <input class="form-control"  type="text"
+                placeholder="Art der Versicherung"
+                formControlName="artderVersicherung">
+            </td>
+            <td>
+              <h5>Datum der Standmitteilung</h5>
+              <input class="form-control" type="date"
+              placeholder="Datum der Standmitteilung"
+              formControlName="datumderStandmitteilung">
+            </td>
+            <td>
+              <h5>Versicherungsbeginn</h5>
+              <input class="form-control" type="date"
+              placeholder="Versicherungsbeginn"
+              formControlName="versicherungsbeginn">
+            </td>
+          </tr>
+          <tr>
+              <h5>Datum Rentenbeginn</h5>
+              <input class="form-control" type="date"
+              placeholder="Datum Rentenbeginn"
+              formControlName="datumRentenbeginn">
+            <td>
 
-<label>
-  Name:
-  <input type="number"  [formControl]="form">
-</label>
-<p>
-  Value: {{ form.value }}
-</p>
+              <h5>aktuelle Beitragszahlungen</h5>
+              <input class="form-control" type="number"
+              placeholder="aktuelle Beitragszahlungen"
+              formControlName="aktuelleBeitragszahlungen">
+            <td>
+              <h5>Aktuelles Vorsorgevermögen</h5>
+              <input class="form-control" type="number"
+              placeholder="Aktuelles Vorsorgevermögen"
+              formControlName="aktuellesVorsorgevermögen">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h5>Garantiezins</h5>
+              <input class="form-control" type="number"
+              placeholder="Garantiezins"
+              formControlName="garantiezins">
+            </td>
+            <td>
+              <h5>ausgewiesene derzeitigen Überschussbeteiligung</h5>
+              <input class="form-control" type="number"
+              placeholder="ausgewiesene derzeitigen Überschussbeteiligung"
+              formControlName="ausgewiesenederzeitigenÜberschussbeteiligung">
+            </td>
+            <td>
+              <h5>derzeitige Gesamtverzinsung</h5>
+              <input class="form-control" type="number"
+              placeholder="derzeitige Gesamtverzinsung"
+              formControlName="derzeitigeGesamtverzinsung">
+            </td>
+          </tr>
+        <tr>
+            <td>
+              <h5>Höhe der garantierten Altersrente</h5>
+              <input class="form-control" type="number"
+              placeholder="Höhe der garantierten Altersrente"
+              formControlName="höhedergarantiertenAltersrente">
+            </td>
+            <td>
+              <h5>Höhe der Altersrente beiderzeitigen Überschussbeteiligungen</h5>
+              <input class="form-control" type="number"
+              placeholder="Höhe der Altersrente beiderzeitigen Überschussbeteiligungen"
+              formControlName="höhederAltersrentebeiderzeitigenÜberschussbeteiligungen">
+            </td>
+            <td>
+              <h5>Höhe der garantierten Altersrentebei Fortzahlung der derzeitigen Beiträge</h5>
+              <input class="form-control" type="number"
+              placeholder="Höhe der garantierten Altersrentebei Fortzahlung der derzeitigen Beiträge"
+              formControlName="höhedergarantiertenAltersrentebeiFortzahlungderderzeitigenBeiträge">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h5>Höhe der Altersrente bei derzeitigen Überschussbeteiligungen bei Fortzahlung der derzeitigen Beiträge</h5>
+              <input class="form-control" type="number"
+              placeholder="Höhe der Altersrente bei derzeitigen Überschussbeteiligungen bei Fortzahlung der derzeitigen Beiträge"
+              formControlName="höhederAltersrentebeiderzeitigenÜberschussbeteiligungenbeiFortzahlungderderzeitigenBeiträge">
+            </td>
+            <td>
+              <h5>Fondskapital bei Fondswachstum von X Prozent bei Rentenbeginn</h5>
+              <input class="form-control" type="number"
+              placeholder="Fondskapital bei Fondswachstum von X Prozent bei Rentenbeginn"
+              formControlName="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginn">
+            </td>
+            <td>
+              <h5>Fondskapital bei Fondswachstum von X Prozent bei Rentenbeginn bei Fortzahlung der derzeitigen Beiträge</h5>
+              <input class="form-control" type="number"
+              placeholder="Fondskapital bei Fondswachstum von X Prozent bei Rentenbeginn bei Fortzahlung der derzeitigen Beiträge"
+              formControlName="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginnbeiFortzahlungderderzeitigenBeiträge">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h5>Hochrechnung des garantierten Altersvorsorgevermögens</h5>
+              <input class="form-control" type="number"
+              placeholder="Hochrechnung des garantierten Altersvorsorgevermögens"
+              formControlName="hochrechnungdesgarantiertenAltersvorsorgevermögens">
+            </td>
+            <td>
+              <h5>Hochrechnung des Altersvorsorgevermögens</h5>
+              <input class="form-control" type="number"
+              placeholder="Hochrechnung des Altersvorsorgevermögens"
+              formControlName="hochrechnungdesAltersvorsorgevermögens">
+            </td>
+            <td>
+              <h5>Rentenfaktor</h5>
+              <input class="form-control" type="number"
+              placeholder="Rentenfaktor"
+              formControlName="rentenfaktor">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h5>Aktueller Rentenfaktor je Zehn Tausend Euro Vorsorgeguthaben</h5>
+              <input class="form-control" type="number"
+              placeholder="Aktueller Rentenfaktor je Zehn Tausend Euro Vorsorgeguthaben"
+              formControlName="aktuellerRentenfaktorjeZehnTausendEuroVorsorgeguthaben">
+            </td>
+            <td>
+              <h5>Garantierter Rentenfaktor je Zehn Tausend Euro Vorsorgeguthaben</h5>
+              <input class="form-control" type="number"
+              placeholder="Garantierter Rentenfaktor je Zehn Tausend Euro Vorsorgeguthaben"
+              formControlName="garantierterRentenfaktorjeZehnTausendEuroVorsorgeguthaben">
+            </td>
+            <td>
+              <h5>aktuelle jährlich gezahlte Zulagen</h5>
+              <input class="form-control" type="number"
+              placeholder="aktuelle jährlich gezahlte Zulagen"
+              formControlName="aktuellejährlichgezahlteZulagen">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h5>Grundzulagen</h5>
+              <input class="form-control" type="checkbox"
+              placeholder="Grundzulagen"
+              formControlName="grundzulagen">
+            </td>
+            <td>
+              <h5>Anzahl der Kinder die berücksichtigt werden</h5>
+              <input class="form-control" type="number"
+              placeholder="Anzahl der Kinder die berücksichtigt werden"
+              formControlName="anzahlderKinderdieberücksichtigtwerden">
+            </td>
+            <td>
+              <h5>Anzahl der Kinder</h5>
+              <input class="form-control" type="number"
+              placeholder="Anzahl der Kinder"
+              formControlName="anzahlderKinder">
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <h5>Geburtsdatum der Kinder</h5>
+              <input class="form-control" type="date"
+              placeholder="Geburtsdatum der Kinder"
+              formControlName="geburtsDatumDerKinder">
+            </td>
+          </tr>
+          </div>
+        </table>
+          <div (click)= "submitForm()" class="form-group" style="width:100%">
+              <button class="btn btn-danger btn-block btn-lg">Create</button>
+          </div>
+      </form>
+  </div>
 </body>
 </html>
 
