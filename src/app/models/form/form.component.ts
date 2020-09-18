@@ -2,22 +2,38 @@ import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { RentenServiceService } from 'src/app/services/renten-service.service'
 import { FormModel } from './form-Model';
+import {style, state, animate, transition, trigger, AnimationTriggerMetadata} from '@angular/animations';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css'],
   providers: [
-    {provide: RentenServiceService, useClass: RentenServiceService}
+    {provide: RentenServiceService, useClass: RentenServiceService},
+    {provide: FormModel, useClass: FormModel}
+  ],
+  animations: [
+    trigger('fadeInOut', [
+      transition(':enter', [   // :enter is alias to 'void => *'
+        style({opacity:0}),
+        animate(500, style({opacity:1}))
+      ]),
+      transition(':leave', [   // :leave is alias to '* => void'
+        animate(500, style({opacity:0}))
+      ])
+    ])
   ]
 })
+
 export class FormComponent implements OnInit {
   form: FormGroup;
-  formModel: FormModel;
   formData: FormData;
+  public rentenResponse: any;
+  public waehrung;
 
-  constructor(public rentenService: RentenServiceService) {
+
+  constructor(public formModel: FormModel, public rentenService: RentenServiceService) {
     this.formModel = new FormModel();
-
+    this.rentenResponse = null;
     this.formData = new FormData();
     this.form = new FormGroup(
     ({
@@ -108,13 +124,15 @@ export class FormComponent implements OnInit {
     this.formModel.kinder.geburtsDatumDerKinder = this.form.get('geburtsDatumDerKinder').value;
     return this.formModel;
   }
-
+  changecheckBox(){
+    this.formModel.zulagen.grundzulagen = this.form.get('grundzulagen').value;
+  }
   getRentenInfo()
   {
     this.rentenService.getRente(this.submitForm()).subscribe((res) => {
-      console.log(this.submitForm());
-      let rentenInfo = res;
-      console.log(rentenInfo);
+    this.rentenResponse = res;
+    this.waehrung = this.rentenResponse.summe.währung;
     });
   }
+
 }
