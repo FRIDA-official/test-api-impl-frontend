@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
+import { RentenServiceService } from 'src/app/services/renten-service.service'
 import { FormModel } from './form-Model';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['./form.component.css'],
+  providers: [
+    {provide: RentenServiceService, useClass: RentenServiceService}
+  ]
 })
 export class FormComponent implements OnInit {
   form: FormGroup;
   formModel: FormModel;
   formData: FormData;
-  url: string = "http://test-api-impl-spring.herokuapp.com/v2/RentenKalkulation";
 
-
-  constructor(public fb: FormBuilder, private http: HttpClient) {
+  constructor(public rentenService: RentenServiceService) {
     this.formModel = new FormModel();
     this.formData = new FormData();
     this.form = new FormGroup(
@@ -48,8 +48,6 @@ export class FormComponent implements OnInit {
       kinder:new FormControl(),
       anzahlderKinder: new FormControl(),
       geburtsDatumDerKinder: new FormControl(),
-
-
     }));
     this.formModel.artderVersicherung = "";
     this.formModel.datumderStandmitteilung = null;
@@ -81,7 +79,6 @@ export class FormComponent implements OnInit {
   }
 
   submitForm() {
-
     this.formModel.artderVersicherung = this.form.get('artderVersicherung').value;
     this.formModel.datumderStandmitteilung =this.form.get('datumderStandmitteilung').value;
     this.formModel.datumRentenbeginn = this.form.get('datumRentenbeginn').value;
@@ -112,7 +109,13 @@ export class FormComponent implements OnInit {
       console.log(`${key}: ${value}`);
     }*/
     console.log(this.formModel);
-
+    this.getRentenInfo();
     return this.formData;
+  }
+  getRentenInfo()
+  {
+    this.rentenService.getRente(this.formModel).subscribe((res) => {
+      console.log(res);
+    });
   }
 }

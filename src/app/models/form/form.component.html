@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <div class="container">
+
       <form [formGroup]="form" (ngSubmit)="submitForm()">
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -180,11 +180,14 @@
               formControlName="geburtsDatumDerKinder">
           </div>
         </div>
+
+      <div class="container">
         <div class="form-group">
             <button class="btn btn-danger btn-block btn-lg">Create</button>
         </div>
+      </div>
       </form>
-  </div>
+
 </body>
 </html>
 
