@@ -17,6 +17,7 @@ export class FormComponent implements OnInit {
 
   constructor(public rentenService: RentenServiceService) {
     this.formModel = new FormModel();
+
     this.formData = new FormData();
     this.form = new FormGroup(
     ({
@@ -49,7 +50,9 @@ export class FormComponent implements OnInit {
       anzahlderKinder: new FormControl(),
       geburtsDatumDerKinder: new FormControl(),
     }));
-    this.formModel.artderVersicherung = "";
+
+    this.formModel.artderVersicherung = null;
+    this.formModel.versicherungsbeginn = null;
     this.formModel.datumderStandmitteilung = null;
     this.formModel.datumRentenbeginn = null;
     this.formModel.aktuelleBeitragszahlungen = null;
@@ -81,6 +84,7 @@ export class FormComponent implements OnInit {
   submitForm() {
     this.formModel.artderVersicherung = this.form.get('artderVersicherung').value;
     this.formModel.datumderStandmitteilung =this.form.get('datumderStandmitteilung').value;
+    this.formModel.versicherungsbeginn = this.form.get('versicherungsbeginn').value;
     this.formModel.datumRentenbeginn = this.form.get('datumRentenbeginn').value;
     this.formModel.aktuelleBeitragszahlungen =this.form.get('aktuelleBeitragszahlungen').value;
     this.formModel.aktuellesVorsorgevermögen =this.form.get('aktuellesVorsorgevermögen').value;
@@ -102,20 +106,15 @@ export class FormComponent implements OnInit {
     this.formModel.zulagen.kinderzulagen.anzahlderKinderdieberücksichtigtwerden =  this.form.get('anzahlderKinderdieberücksichtigtwerden').value;
     this.formModel.kinder.anzahlderKinder =  this.form.get('anzahlderKinder').value;
     this.formModel.kinder.geburtsDatumDerKinder = this.form.get('geburtsDatumDerKinder').value;
-    this.formData.append("model", JSON.stringify(this.formModel));
-    console.log(this.formData.getAll("model"));
-/*
-    for (let [key, value] of this.formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }*/
-    console.log(this.formModel);
-    this.getRentenInfo();
-    return this.formData;
+    return this.formModel;
   }
+
   getRentenInfo()
   {
-    this.rentenService.getRente(this.formModel).subscribe((res) => {
-      console.log(res);
+    this.rentenService.getRente(this.submitForm()).subscribe((res) => {
+      console.log(this.submitForm());
+      let rentenInfo = res;
+      console.log(rentenInfo);
     });
   }
 }
