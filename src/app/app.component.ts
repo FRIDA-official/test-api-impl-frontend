@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {OAuthService} from 'angular-oauth2-oidc';
-import { JwksValidationHandler } from 'angular-oauth2-oidc';
+import { OAuthErrorEvent, OAuthService } from 'angular-oauth2-oidc';
+import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
 import {authCodeFlowConfig } from './auth/OAuth2Config';
 
 @Component({
@@ -16,7 +16,7 @@ export class AppComponent{
 
   constructor(public oauthService: OAuthService){
     this.oauthService.configure(authCodeFlowConfig);
-    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+    //this.oauthService.tokenValidationHandler = new JwksValidationHandler();
     this.oauthService.loadDiscoveryDocumentAndTryLogin();
   }
   title = 'angularclient';

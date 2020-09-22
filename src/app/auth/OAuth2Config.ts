@@ -9,14 +9,14 @@ export const authCodeFlowConfig: AuthConfig = {
 
   // The SPA's id. The SPA is registerd with this id at the auth-server
   // clientId: 'server.code',
-  clientId: '0oa6wxz4uOexwXCoa416',
+  clientId: '0oa7gkzquj8GIfQ9n416',
   // set the scope for the permissions the client should request
   // The first four are defined by OIDC. 
   // Important: Request offline_access to get a refresh token
   // The api scope is a usecase specific one
-  scope: 'openid',
+  scope: 'openid profile email',
 
-  showDebugInformation: true,
+  responseType: 'code',
 
-  responseType: 'token',
+  showDebugInformation: true
 };
