@@ -22,14 +22,14 @@
     </div>
     <form [formGroup]="form" (ngSubmit)="getRentenInfo()">
         <h2>Anbieter</h2>
-        <div class="dropdown">
+        <div class="btn-group dropright">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Anbieter
+              {{chosenSupplier}}
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button">Action</button>
-                <button class="dropdown-item" type="button">Another action</button>
-                <button class="dropdown-item" type="button">Something else here</button>
+                <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 1'">Versicherer 1</button>
+                <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 2'">Versicherer 2</button>
+                <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 3'">Versicherer 3</button>
             </div>
         </div>
         <h2>Allgemeine Vertragsinformationen</h2>
@@ -153,7 +153,7 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">
-                <label class="form-check-inline" for="grundzulagen">Grundzulagen</label>
+                <h2 class="form-check-inline" for="grundzulagen">Grundzulagen</h2>
                 <input class="checkbox style-2 pull-right" type="checkbox" (change)="changecheckBox()" id="grundzulagen" formControlName="grundzulagen">
             </div>
         </div>

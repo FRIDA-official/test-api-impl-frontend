@@ -29,6 +29,7 @@ export class FormComponent implements OnInit {
   formData: FormData;
   public rentenResponse: any;
   public waehrung;
+  public chosenSupplier = "Anbieter";
 
 
   constructor(public formModel: FormModel, public rentenService: RentenServiceService) {
@@ -133,6 +134,11 @@ export class FormComponent implements OnInit {
     this.rentenResponse = res;
     this.waehrung = this.rentenResponse.summe.währung;
     });
+  }
+  
+  changeChosenSupplier(supplier:string)
+  {
+    this.chosenSupplier = supplier;
   }
 
 }
