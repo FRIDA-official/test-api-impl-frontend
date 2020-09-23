@@ -19,8 +19,8 @@ export class RentenServiceService {
 
 
   constructor(private http : HttpClient, public oauthService: OAuthService) {
-    //this.baseUrl = 'https://test-api-impl-backend-jaxrs.herokuapp.com/v2';
-    this.baseUrl = 'http://localhost:8080/rest/v2';
+    this.baseUrl = 'https://test-api-impl-backend-jaxrs.herokuapp.com/v2';
+    //this.baseUrl = 'http://localhost:8080/rest/v2';
   }
 
   public getRente(formModel: any) {

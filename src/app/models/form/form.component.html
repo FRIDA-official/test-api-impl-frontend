@@ -24,11 +24,23 @@
             </button>
           </li>
         </ul>
-
       </nav>
     </header>
   </div>
+
   <form [formGroup]="form" (ngSubmit)="getRentenInfo()">
+    <h2>Anbieter</h2>
+    <div class="btn-group dropright">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {{chosenSupplier}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 1'">Versicherer 1</button>
+        <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 2'">Versicherer 2</button>
+        <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 3'">Versicherer 3</button>
+      </div>
+    </div>
     <h2>Allgemeine Vertragsinformationen</h2>
     <div class="form-row">
       <div class="form-group col-md-6">
@@ -57,9 +69,9 @@
     <h2>Beitragsinformationen</h2>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="aktuelleBeitragszahlungen">aktuelle Beitragszahlungen</label>
+        <label for="aktuelleBeitragszahlungen">Aktuelle Beitragszahlungen</label>
         <input class="form-control" type="number" min="0" id="aktuelleBeitragszahlungen"
-          placeholder="aktuelle Beitragszahlungen" formControlName="aktuelleBeitragszahlungen">
+          placeholder="Aktuelle Beitragszahlungen" formControlName="aktuelleBeitragszahlungen">
       </div>
       <div class="form-group col-md-6">
         <label for="aktuellesVorsorgevermögen">Aktuelles Vorsorgevermögen</label>
@@ -74,16 +86,17 @@
           formControlName="garantiezins">
       </div>
       <div class="form-group col-md-6">
-        <label for="ausgewiesenederzeitigenÜberschussbeteiligung">ausgewiesene derzeitigen Überschussbeteiligung</label>
-        <input class="form-control" type="number" min="0" placeholder="ausgewiesene derzeitigen Überschussbeteiligung"
+        <label for="ausgewiesenederzeitigenÜberschussbeteiligung">Ausgewiesene derzeitigen
+          Überschussbeteiligung</label>
+        <input class="form-control" type="number" min="0" placeholder="Ausgewiesene derzeitigen Überschussbeteiligung"
           formControlName="ausgewiesenederzeitigenÜberschussbeteiligung">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="derzeitigeGesamtverzinsung">derzeitige Gesamtverzinsung</label>
+        <label for="derzeitigeGesamtverzinsung">Derzeitige Gesamtverzinsung</label>
         <input class="form-control" type="number" min="0" id="derzeitigeGesamtverzinsung"
-          placeholder="derzeitige Gesamtverzinsung" formControlName="derzeitigeGesamtverzinsung">
+          placeholder="Derzeitige Gesamtverzinsung" formControlName="derzeitigeGesamtverzinsung">
       </div>
       <div class="form-group col-md-6">
         <label for="höhedergarantiertenAltersrente">Höhe der garantierten Altersrente</label>
@@ -121,8 +134,8 @@
     <h2>Fond & Altersvorsorgevermögen</h2>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginn">Fondskapital bei Fondswachstum von X Prozent
-          bei Rentenbeginn</label>
+        <label for="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginn">Fondskapital bei Fondswachstum von X
+          Prozent bei Rentenbeginn</label>
         <input class="form-control" type="number" min="0" id="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginn"
           placeholder="Fondskapital bei Fondswachstum von X Prozent bei Rentenbeginn"
           formControlName="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginn">
@@ -146,7 +159,8 @@
           formControlName="hochrechnungdesgarantiertenAltersvorsorgevermögens">
       </div>
       <div class="form-group col-md-6">
-        <label for="hochrechnungdesgarantiertenAltersvorsorgevermögens">Hochrechnung des Altersvorsorgevermögens</label>
+        <label for="hochrechnungdesgarantiertenAltersvorsorgevermögens">Hochrechnung des
+          Altersvorsorgevermögens</label>
         <input class="form-control" type="number" min="0" placeholder="Hochrechnung des Altersvorsorgevermögens"
           formControlName="hochrechnungdesAltersvorsorgevermögens">
       </div>
@@ -158,8 +172,8 @@
         <input class="form-control" type="number" min="0" placeholder="Rentenfaktor" formControlName="rentenfaktor">
       </div>
       <div class="form-group col-md-6">
-        <label for="aktuellerRentenfaktorjeZehnTausendEuroVorsorgeguthaben">Aktueller Rentenfaktor je Zehn Tausend Euro
-          Vorsorgeguthaben</label>
+        <label for="aktuellerRentenfaktorjeZehnTausendEuroVorsorgeguthaben">Aktueller Rentenfaktor je Zehn Tausend
+          Euro Vorsorgeguthaben</label>
         <input class="form-control" type="number" min="0" id="aktuellerRentenfaktorjeZehnTausendEuroVorsorgeguthaben"
           placeholder="Aktueller Rentenfaktor je Zehn Tausend Euro Vorsorgeguthaben"
           formControlName="aktuellerRentenfaktorjeZehnTausendEuroVorsorgeguthaben">
@@ -177,9 +191,9 @@
     <h2>Zulagen</h2>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="aktuellejährlichgezahlteZulagen">aktuelle jährlich gezahlte Zulagen</label>
+        <label for="aktuellejährlichgezahlteZulagen">Aktuelle jährlich gezahlte Zulagen</label>
         <input class="form-control" type="number" min="0" id="aktuellejährlichgezahlteZulagen"
-          placeholder="aktuelle jährlich gezahlte Zulagen" formControlName="aktuellejährlichgezahlteZulagen">
+          placeholder="Aktuelle jährlich gezahlte Zulagen" formControlName="aktuellejährlichgezahlteZulagen">
       </div>
       <div class="form-group col-md-6">
         <label for="anzahlderKinderdieberücksichtigtwerden">Anzahl der Kinder die berücksichtigt werden</label>
@@ -190,9 +204,9 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-6">
-        <label for="grundzulagen">Grundzulagen</label>
-        <input class="form-control" type="checkbox" (change)="changecheckBox()" placeholder="Grundzulagen"
-          id="grundzulagen" text-align="left" formControlName="grundzulagen">
+        <h2 class="form-check-inline" for="grundzulagen">Grundzulagen</h2>
+        <input class="checkbox style-2 pull-right" type="checkbox" (change)="changecheckBox()" id="grundzulagen"
+          formControlName="grundzulagen">
       </div>
     </div>
     <div id="myZulagen" *ngIf="formModel.zulagen.grundzulagen" [@fadeInOut]>
@@ -223,7 +237,6 @@
       </div>
     </div>
   </form>
-  <script src="script.js"></script>
 </body>
 
 </html>
