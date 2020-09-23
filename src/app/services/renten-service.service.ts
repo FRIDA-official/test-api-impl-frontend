@@ -29,8 +29,14 @@ export class RentenServiceService {
     console.log(this.oauthService.authorizationHeader());
     console.log(this.oauthService.getGrantedScopes());
     console.log(this.oauthService.hasValidAccessToken());
-    console.log(this.oauthService.hasValidIdToken());
-    
-    return this.http.post(this.baseUrl+"/RentenKalkulation", formModel);
+
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: this.oauthService.authorizationHeader(),
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      'Access-Control-Expose-Headers': 'Authorization',
+      'Access-Control-Allow-Headers': 'authorization'
+  });
+
+    return this.http.post(this.baseUrl+"/RentenKalkulation", formModel, { headers: httpHeaders});
   }
 }

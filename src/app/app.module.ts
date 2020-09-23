@@ -4,9 +4,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormComponent } from './models/form/form.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { AuthInterceptor } from './auth/AuthInterceptor'
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { OAuthModule } from 'angular-oauth2-oidc';
     ReactiveFormsModule,
     OAuthModule.forRoot()
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
