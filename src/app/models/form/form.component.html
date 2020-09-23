@@ -21,6 +21,17 @@
         </header>
     </div>
     <form [formGroup]="form" (ngSubmit)="getRentenInfo()">
+        <h2>Anbieter</h2>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Anbieter
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" type="button">Action</button>
+                <button class="dropdown-item" type="button">Another action</button>
+                <button class="dropdown-item" type="button">Something else here</button>
+            </div>
+        </div>
         <h2>Allgemeine Vertragsinformationen</h2>
         <div class="form-row">
             <div class="form-group col-md-6">
