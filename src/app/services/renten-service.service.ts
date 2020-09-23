@@ -37,6 +37,6 @@ export class RentenServiceService {
       'Access-Control-Allow-Headers': 'authorization'
   });
 
-    return this.http.post(this.baseUrl+"/RentenKalkulation", formModel, { headers: httpHeaders});
+    return this.http.post(this.baseUrl+"/RentenKalkulation", formModel);
   }
 }

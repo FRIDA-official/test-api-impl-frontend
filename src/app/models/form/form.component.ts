@@ -140,4 +140,12 @@ export class FormComponent implements OnInit {
     this.oauthService.initLoginFlow();
   }
 
+  logout() {
+    this.oauthService.logOut();
+  }
+
+  hasValidToken(): Boolean {
+    return this.oauthService.hasValidAccessToken();
+  }
+
 }
