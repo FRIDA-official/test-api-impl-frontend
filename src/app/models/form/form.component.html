@@ -27,8 +27,10 @@
       </nav>
     </header>
   </div>
-
   <form [formGroup]="form" (ngSubmit)="getRentenInfo()">
+    <div *ngIf="!hasValidToken()" class="alert alert-danger" role="alert">
+      Sie sind für die Kalkulation nicht berechtigt! Bitte loggen sie sich vorher ein.
+    </div>
     <h2>Anbieter</h2>
     <div class="btn-group dropright">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
@@ -228,7 +230,7 @@
     </div>
     <div class="container">
       <div class="form-group">
-        <button class="btn btn-block btn-lg">Berechnen</button>
+        <button [disabled]="!hasValidToken()" class="btn btn-block btn-lg">Berechnen</button>
       </div>
       <div *ngIf="rentenResponse">
         <textarea style="text-align: center" readonly>
