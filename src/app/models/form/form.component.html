@@ -15,13 +15,16 @@
         <ul>
           <li><a href="http://localhost:4200/">RentenInfo</a></li>
           <li><a href="http://localhost:4200/">PensionsInfo</a></li>
+          <li>
+            <button *ngIf="!hasValidToken()" class="btn btn-default" (click)="login()" [ngStyle]="{'padding': '0.8em'}">
+              Login
+            </button>
+            <button *ngIf="hasValidToken()" class="btn btn-default" (click)="logout()" [ngStyle]="{'padding': '0.8em'}">
+              Logout
+            </button>
+          </li>
         </ul>
-        <button *ngIf="!hasValidToken()" class="btn btn-default" (click)="login()">
-          Login
-        </button>
-        <button *ngIf="hasValidToken()" class="btn btn-default" (click)="logout()">
-          Logout
-        </button>
+
       </nav>
     </header>
   </div>
