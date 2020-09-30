@@ -3,6 +3,7 @@ import { OAuthErrorEvent, OAuthService } from 'angular-oauth2-oidc';
 import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
 import {authCodeFlowConfig } from './auth/OAuth2Config';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

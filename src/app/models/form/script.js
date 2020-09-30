@@ -26,3 +26,20 @@ var checkHeader = _.throttle(() => {
     }
 }, 300);
 
+
+var $input = $(".typeahead");
+$input.typeahead({
+  source: [
+    {id: "1", name: "Web Developer"},
+    {id: "2", name: "Web Designer"},
+    {id: "3", name: "Architecturer"},
+    {id: "4", name: "Costume Designer"},
+    {id: "5", name: "Business Administrator"},
+    {id: "6", name: "Lecturer"},
+    {id: "7", name: "Financial Expert"},
+    {id: "8", name: "Interior Designer"},
+    {id: "9", name: "Fashion Designer"},
+    {id: "10", name: "Chartered Accountant"}
+  ],
+  autoSelect: true
+});

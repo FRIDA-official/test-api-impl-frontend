@@ -4,6 +4,7 @@ import { RentenServiceService } from 'src/app/services/renten-service.service'
 import { FormModel } from './form-Model';
 import { style, animate, transition, trigger} from '@angular/animations';
 import { OAuthService } from 'angular-oauth2-oidc';
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',

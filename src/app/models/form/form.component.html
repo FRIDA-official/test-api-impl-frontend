@@ -5,7 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="form.component.css" center-align="">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="http://nicesnippets.com/demo/bootstrap3-typeahead.min.js"></script>
 </head>
+
 
 <body>
   <div class="header" id="myHeader">
@@ -30,16 +33,27 @@
 
   <form [formGroup]="form" (ngSubmit)="getRentenInfo()">
     <h2>Anbieter</h2>
-    <div class="btn-group dropright">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-        {{chosenSupplier}}
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 1'">Versicherer 1</button>
-        <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 2'">Versicherer 2</button>
-        <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 3'">Versicherer 3</button>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <div class="btn-group dropright">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {{chosenSupplier}}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenq2">
+            <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 1'">Versicherer 1</button>
+            <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 2'">Versicherer 2</button>
+            <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 3'">Versicherer 3</button>
+          </div>
+        </div>
       </div>
+      <div class="form-group col-md-6" id="versichererInput">
+        <div float="right" class="input-group">
+          <input class="typeahead form-control" type="text"
+          value={{chosenSupplier}}
+          >
+        </div>
+     </div>
     </div>
     <h2>Allgemeine Vertragsinformationen</h2>
     <div class="form-row">
