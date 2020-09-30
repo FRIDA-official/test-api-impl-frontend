@@ -36,7 +36,7 @@ export class RentenServiceService {
       'Access-Control-Expose-Headers': 'Authorization',
       'Access-Control-Allow-Headers': 'authorization'
     });
-    
+
     switch(chosenSupplier){
       case "Versicherer 1":
         return this.http.post(this.baseUrl+"/RentenKalkulation", formModel);
@@ -47,4 +47,5 @@ export class RentenServiceService {
       default:
         return this.http.post(this.baseUrl+"/RentenKalkulation", formModel);
     }
-
+  }
+}
