@@ -3,6 +3,7 @@ import { Form, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { RentenServiceService } from 'src/app/services/renten-service.service'
 import { FormModel } from './form-Model';
 import {style, state, animate, transition, trigger, AnimationTriggerMetadata} from '@angular/animations';
+import { OAuthService } from 'angular-oauth2-oidc';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -32,7 +33,7 @@ export class FormComponent implements OnInit {
   public chosenSupplier = "Versicherer 1";
 
 
-  constructor(public formModel: FormModel, public rentenService: RentenServiceService) {
+  constructor(public formModel: FormModel, public rentenService: RentenServiceService, public oauthService: OAuthService) {
     this.formModel = new FormModel();
     this.rentenResponse = null;
     this.formData = new FormData();
@@ -140,6 +141,18 @@ export class FormComponent implements OnInit {
   {
     this.chosenSupplier = supplier;
 
+  }
+
+  login() {
+    this.oauthService.initLoginFlow();
+  }
+
+  logout() {
+    this.oauthService.logOut();
+  }
+
+  hasValidToken(): Boolean {
+    return this.oauthService.hasValidAccessToken();
   }
 
 }

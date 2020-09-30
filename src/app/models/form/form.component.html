@@ -2,188 +2,241 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="form.component.css" center-align="">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="form.component.css" center-align="">
 </head>
 
 <body>
-    <div class="header" id="myHeader">
-        <header>
-            <img src="./assets/images/logo_2.png" width=10% height=10%>
-            <nav>
-                <ul>
-                    <li><a href="http://localhost:4200/">RentenInfo</a></li>
-                    <li><a href="http://localhost:4200/">PensionsInfo</a></li>
-                </ul>
-
-            </nav>
-        </header>
-    </div>
-    <form [formGroup]="form" (ngSubmit)="getRentenInfo()">
-        <h2>Anbieter</h2>
-        <div class="btn-group dropright">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              {{chosenSupplier}}
+  <div class="header" id="myHeader">
+    <header>
+      <img src="./assets/images/logo_2.png" width=10% height=10%>
+      <nav>
+        <ul>
+          <li><a href="http://localhost:4200/">RentenInfo</a></li>
+          <li><a href="http://localhost:4200/">PensionsInfo</a></li>
+          <li>
+            <button *ngIf="!hasValidToken()" class="btn btn-default" (click)="login()" [ngStyle]="{'padding': '0.8em'}">
+              Login
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 1'">Versicherer 1</button>
-                <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 2'">Versicherer 2</button>
-                <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 3'">Versicherer 3</button>
-            </div>
+            <button *ngIf="hasValidToken()" class="btn btn-default" (click)="logout()" [ngStyle]="{'padding': '0.8em'}">
+              Logout
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="getRentenInfo()">
+    <h2>Anbieter</h2>
+    <div class="btn-group dropright">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {{chosenSupplier}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+        <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 1'">Versicherer 1</button>
+        <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 2'">Versicherer 2</button>
+        <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 3'">Versicherer 3</button>
+      </div>
+    </div>
+    <h2>Allgemeine Vertragsinformationen</h2>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="artderVersicherung">Art der Versicherung</label>
+        <input class="form-control" type="text" id="artderVersicherung" placeholder="Art der Versicherung"
+          formControlName="artderVersicherung">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="datumderStandmitteilung">Datum der Standmitteilung</label>
+        <input class="form-control" type="date" id="datumderStandmitteilung" placeholder="Datum der Standmitteilung"
+          formControlName="datumderStandmitteilung">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="versicherungsbeginn">Versicherungsbeginn</label>
+        <input class="form-control" type="date" id="versicherungsbeginn" placeholder="Versicherungsbeginn"
+          formControlName="versicherungsbeginn">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="datumRentenbeginn">Datum Rentenbeginn</label>
+        <input class="form-control" type="date" id="datumRentenbeginn" placeholder="Datum Rentenbeginn"
+          formControlName="datumRentenbeginn">
+      </div>
+    </div>
+    <h2>Beitragsinformationen</h2>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="aktuelleBeitragszahlungen">Aktuelle Beitragszahlungen</label>
+        <input class="form-control" type="number" min="0" id="aktuelleBeitragszahlungen"
+          placeholder="Aktuelle Beitragszahlungen" formControlName="aktuelleBeitragszahlungen">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="aktuellesVorsorgevermögen">Aktuelles Vorsorgevermögen</label>
+        <input class="form-control" type="number" min="0" placeholder="Aktuelles Vorsorgevermögen"
+          formControlName="aktuellesVorsorgevermögen">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="garantiezins">Garantiezins</label>
+        <input class="form-control" type="number" min="0" id="garantiezins" placeholder="Garantiezins"
+          formControlName="garantiezins">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="ausgewiesenederzeitigenÜberschussbeteiligung">Ausgewiesene derzeitigen
+          Überschussbeteiligung</label>
+        <input class="form-control" type="number" min="0" placeholder="Ausgewiesene derzeitigen Überschussbeteiligung"
+          formControlName="ausgewiesenederzeitigenÜberschussbeteiligung">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="derzeitigeGesamtverzinsung">Derzeitige Gesamtverzinsung</label>
+        <input class="form-control" type="number" min="0" id="derzeitigeGesamtverzinsung"
+          placeholder="Derzeitige Gesamtverzinsung" formControlName="derzeitigeGesamtverzinsung">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="höhedergarantiertenAltersrente">Höhe der garantierten Altersrente</label>
+        <input class="form-control" type="number" min="0" id="höhedergarantiertenAltersrente"
+          placeholder="Höhe der garantierten Altersrente" formControlName="höhedergarantiertenAltersrente">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="höhederAltersrentebeiderzeitigenÜberschussbeteiligungen">Höhe der Altersrente beiderzeitigen
+          Überschussbeteiligungen</label>
+        <input class="form-control" type="number" min="0" id="höhederAltersrentebeiderzeitigenÜberschussbeteiligungen"
+          placeholder="Höhe der Altersrente beiderzeitigen Überschussbeteiligungen"
+          formControlName="höhederAltersrentebeiderzeitigenÜberschussbeteiligungen">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="höhedergarantiertenAltersrentebeiFortzahlungderderzeitigenBeiträge">Höhe der garantierten
+          Altersrentebei Fortzahlung der derzeitigen Beiträge</label>
+        <input class="form-control" type="number" min="0"
+          id="höhedergarantiertenAltersrentebeiFortzahlungderderzeitigenBeiträge"
+          placeholder="Höhe der garantierten Altersrentebei Fortzahlung der derzeitigen Beiträge"
+          formControlName="höhedergarantiertenAltersrentebeiFortzahlungderderzeitigenBeiträge">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="höhederAltersrentebeiderzeitigenÜberschussbeteiligungenbeiFortzahlungderderzeitigenBeiträge">Höhe
+          der Altersrente bei derzeitigen Überschussbeteiligungen bei Fortzahlung der derzeitigen Beiträge</label>
+        <input class="form-control" type="number" min="0"
+          id="höhederAltersrentebeiderzeitigenÜberschussbeteiligungenbeiFortzahlungderderzeitigenBeiträge"
+          placeholder="Höhe der Altersrente bei derzeitigen Überschussbeteiligungen bei Fortzahlung der derzeitigen Beiträge"
+          formControlName="höhederAltersrentebeiderzeitigenÜberschussbeteiligungenbeiFortzahlungderderzeitigenBeiträge">
+      </div>
+    </div>
+    <h2>Fond & Altersvorsorgevermögen</h2>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginn">Fondskapital bei Fondswachstum von X
+          Prozent bei Rentenbeginn</label>
+        <input class="form-control" type="number" min="0" id="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginn"
+          placeholder="Fondskapital bei Fondswachstum von X Prozent bei Rentenbeginn"
+          formControlName="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginn">
+      </div>
+      <div class="form-group col-md-6">
+        <label
+          for="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginnbeiFortzahlungderderzeitigenBeiträge">Fondskapital
+          bei Fondswachstum von X Prozent bei Rentenbeginn bei Fortzahlung</label>
+        <input class="form-control" type="number" min="0"
+          id="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginnbeiFortzahlungderderzeitigenBeiträge"
+          placeholder="Fondskapital bei Fondswachstum von X Prozent bei Rentenbeginn bei Fortzahlung der derzeitigen Beiträge"
+          formControlName="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginnbeiFortzahlungderderzeitigenBeiträge">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="hochrechnungdesgarantiertenAltersvorsorgevermögens">Hochrechnung des garantierten
+          Altersvorsorgevermögens</label>
+        <input class="form-control" type="number" min="0" id="hochrechnungdesgarantiertenAltersvorsorgevermögens"
+          placeholder="Hochrechnung des garantierten Altersvorsorgevermögens"
+          formControlName="hochrechnungdesgarantiertenAltersvorsorgevermögens">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="hochrechnungdesgarantiertenAltersvorsorgevermögens">Hochrechnung des
+          Altersvorsorgevermögens</label>
+        <input class="form-control" type="number" min="0" placeholder="Hochrechnung des Altersvorsorgevermögens"
+          formControlName="hochrechnungdesAltersvorsorgevermögens">
+      </div>
+    </div>
+    <h2>Rentenfaktor</h2>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="rentenfaktor">Rentenfaktor</label>
+        <input class="form-control" type="number" min="0" placeholder="Rentenfaktor" formControlName="rentenfaktor">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="aktuellerRentenfaktorjeZehnTausendEuroVorsorgeguthaben">Aktueller Rentenfaktor je Zehn Tausend
+          Euro Vorsorgeguthaben</label>
+        <input class="form-control" type="number" min="0" id="aktuellerRentenfaktorjeZehnTausendEuroVorsorgeguthaben"
+          placeholder="Aktueller Rentenfaktor je Zehn Tausend Euro Vorsorgeguthaben"
+          formControlName="aktuellerRentenfaktorjeZehnTausendEuroVorsorgeguthaben">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="garantierterRentenfaktorjeZehnTausendEuroVorsorgeguthaben">Garantierter Rentenfaktor je Zehn
+          Tnausend Euro Vorsorgeguthabe</label>
+        <input class="form-control" type="number" min="0" id="garantierterRentenfaktorjeZehnTausendEuroVorsorgeguthaben"
+          placeholder="Garantierter Rentenfaktor je Zehn Tausend Euro Vorsorgeguthaben"
+          formControlName="garantierterRentenfaktorjeZehnTausendEuroVorsorgeguthaben">
+      </div>
+    </div>
+    <h2>Zulagen</h2>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="aktuellejährlichgezahlteZulagen">Aktuelle jährlich gezahlte Zulagen</label>
+        <input class="form-control" type="number" min="0" id="aktuellejährlichgezahlteZulagen"
+          placeholder="Aktuelle jährlich gezahlte Zulagen" formControlName="aktuellejährlichgezahlteZulagen">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="anzahlderKinderdieberücksichtigtwerden">Anzahl der Kinder die berücksichtigt werden</label>
+        <input class="form-control" type="number" min="0" id="anzahlderKinderdieberücksichtigtwerden"
+          placeholder="Anzahl der Kinder die berücksichtigt werden"
+          formControlName="anzahlderKinderdieberücksichtigtwerden">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <h2 class="form-check-inline" for="grundzulagen">Grundzulagen</h2>
+        <input class="checkbox style-2 pull-right" type="checkbox" (change)="changecheckBox()" id="grundzulagen"
+          formControlName="grundzulagen">
+      </div>
+    </div>
+    <div id="myZulagen" *ngIf="formModel.zulagen.grundzulagen" [@fadeInOut]>
+      <h2>Kinder</h2>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="anzahlderKinder">Anzahl der Kinder</label>
+          <input class="form-control" type="number" min="0" placeholder="Anzahl der Kinder" id="anzahlderKinder"
+            formControlName="anzahlderKinder">
         </div>
-        <h2>Allgemeine Vertragsinformationen</h2>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="artderVersicherung">Art der Versicherung</label>
-                <input class="form-control" type="text" id="artderVersicherung" placeholder="Art der Versicherung" formControlName="artderVersicherung">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="datumderStandmitteilung">Datum der Standmitteilung</label>
-                <input class="form-control" type="date" id="datumderStandmitteilung" placeholder="Datum der Standmitteilung" formControlName="datumderStandmitteilung">
-            </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="geburtsDatumDerKinder">Geburtsdatum der Kinder</label>
+          <input class="form-control" type="date" placeholder="Geburtsdatum der Kinder" id="geburtsDatumDerKinder"
+            formControlName="geburtsDatumDerKinder">
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="versicherungsbeginn">Versicherungsbeginn</label>
-                <input class="form-control" type="date" id="versicherungsbeginn" placeholder="Versicherungsbeginn" formControlName="versicherungsbeginn">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="datumRentenbeginn">Datum Rentenbeginn</label>
-                <input class="form-control" type="date" id="datumRentenbeginn" placeholder="Datum Rentenbeginn" formControlName="datumRentenbeginn">
-            </div>
-        </div>
-        <h2>Beitragsinformationen</h2>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="aktuelleBeitragszahlungen">Aktuelle Beitragszahlungen</label>
-                <input class="form-control" type="number" min="0" id="aktuelleBeitragszahlungen" placeholder="Aktuelle Beitragszahlungen" formControlName="aktuelleBeitragszahlungen">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="aktuellesVorsorgevermögen">Aktuelles Vorsorgevermögen</label>
-                <input class="form-control" type="number" min="0" placeholder="Aktuelles Vorsorgevermögen" formControlName="aktuellesVorsorgevermögen">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="garantiezins">Garantiezins</label>
-                <input class="form-control" type="number" min="0" id="garantiezins" placeholder="Garantiezins" formControlName="garantiezins">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="ausgewiesenederzeitigenÜberschussbeteiligung">Ausgewiesene derzeitigen Überschussbeteiligung</label>
-                <input class="form-control" type="number" min="0" placeholder="Ausgewiesene derzeitigen Überschussbeteiligung" formControlName="ausgewiesenederzeitigenÜberschussbeteiligung">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="derzeitigeGesamtverzinsung">Derzeitige Gesamtverzinsung</label>
-                <input class="form-control" type="number" min="0" id="derzeitigeGesamtverzinsung" placeholder="Derzeitige Gesamtverzinsung" formControlName="derzeitigeGesamtverzinsung">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="höhedergarantiertenAltersrente">Höhe der garantierten Altersrente</label>
-                <input class="form-control" type="number" min="0" id="höhedergarantiertenAltersrente" placeholder="Höhe der garantierten Altersrente" formControlName="höhedergarantiertenAltersrente">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="höhederAltersrentebeiderzeitigenÜberschussbeteiligungen">Höhe der Altersrente beiderzeitigen Überschussbeteiligungen</label>
-                <input class="form-control" type="number" min="0" id="höhederAltersrentebeiderzeitigenÜberschussbeteiligungen" placeholder="Höhe der Altersrente beiderzeitigen Überschussbeteiligungen" formControlName="höhederAltersrentebeiderzeitigenÜberschussbeteiligungen">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="höhedergarantiertenAltersrentebeiFortzahlungderderzeitigenBeiträge">Höhe der garantierten Altersrentebei Fortzahlung der derzeitigen Beiträge</label>
-                <input class="form-control" type="number" min="0" id="höhedergarantiertenAltersrentebeiFortzahlungderderzeitigenBeiträge" placeholder="Höhe der garantierten Altersrentebei Fortzahlung der derzeitigen Beiträge" formControlName="höhedergarantiertenAltersrentebeiFortzahlungderderzeitigenBeiträge">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="höhederAltersrentebeiderzeitigenÜberschussbeteiligungenbeiFortzahlungderderzeitigenBeiträge">Höhe der Altersrente bei derzeitigen Überschussbeteiligungen bei Fortzahlung der derzeitigen Beiträge</label>
-                <input class="form-control" type="number" min="0" id="höhederAltersrentebeiderzeitigenÜberschussbeteiligungenbeiFortzahlungderderzeitigenBeiträge" placeholder="Höhe der Altersrente bei derzeitigen Überschussbeteiligungen bei Fortzahlung der derzeitigen Beiträge"
-                    formControlName="höhederAltersrentebeiderzeitigenÜberschussbeteiligungenbeiFortzahlungderderzeitigenBeiträge">
-            </div>
-        </div>
-        <h2>Fond & Altersvorsorgevermögen</h2>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginn">Fondskapital bei Fondswachstum von X Prozent bei Rentenbeginn</label>
-                <input class="form-control" type="number" min="0" id="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginn" placeholder="Fondskapital bei Fondswachstum von X Prozent bei Rentenbeginn" formControlName="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginn">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginnbeiFortzahlungderderzeitigenBeiträge">Fondskapital bei Fondswachstum von X Prozent bei Rentenbeginn bei Fortzahlung</label>
-                <input class="form-control" type="number" min="0" id="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginnbeiFortzahlungderderzeitigenBeiträge" placeholder="Fondskapital bei Fondswachstum von X Prozent bei Rentenbeginn bei Fortzahlung der derzeitigen Beiträge"
-                    formControlName="fondskapitalbeiFondswachstumvonXProzentbeiRentenbeginnbeiFortzahlungderderzeitigenBeiträge">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="hochrechnungdesgarantiertenAltersvorsorgevermögens">Hochrechnung des garantierten Altersvorsorgevermögens</label>
-                <input class="form-control" type="number" min="0" id="hochrechnungdesgarantiertenAltersvorsorgevermögens" placeholder="Hochrechnung des garantierten Altersvorsorgevermögens" formControlName="hochrechnungdesgarantiertenAltersvorsorgevermögens">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="hochrechnungdesgarantiertenAltersvorsorgevermögens">Hochrechnung des Altersvorsorgevermögens</label>
-                <input class="form-control" type="number" min="0" placeholder="Hochrechnung des Altersvorsorgevermögens" formControlName="hochrechnungdesAltersvorsorgevermögens">
-            </div>
-        </div>
-        <h2>Rentenfaktor</h2>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="rentenfaktor">Rentenfaktor</label>
-                <input class="form-control" type="number" min="0" placeholder="Rentenfaktor" formControlName="rentenfaktor">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="aktuellerRentenfaktorjeZehnTausendEuroVorsorgeguthaben">Aktueller Rentenfaktor je Zehn Tausend Euro Vorsorgeguthaben</label>
-                <input class="form-control" type="number" min="0" id="aktuellerRentenfaktorjeZehnTausendEuroVorsorgeguthaben" placeholder="Aktueller Rentenfaktor je Zehn Tausend Euro Vorsorgeguthaben" formControlName="aktuellerRentenfaktorjeZehnTausendEuroVorsorgeguthaben">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="garantierterRentenfaktorjeZehnTausendEuroVorsorgeguthaben">Garantierter Rentenfaktor je Zehn Tnausend Euro Vorsorgeguthabe</label>
-                <input class="form-control" type="number" min="0" id="garantierterRentenfaktorjeZehnTausendEuroVorsorgeguthaben" placeholder="Garantierter Rentenfaktor je Zehn Tausend Euro Vorsorgeguthaben" formControlName="garantierterRentenfaktorjeZehnTausendEuroVorsorgeguthaben">
-            </div>
-        </div>
-        <h2>Zulagen</h2>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="aktuellejährlichgezahlteZulagen">Aktuelle jährlich gezahlte Zulagen</label>
-                <input class="form-control" type="number" min="0" id="aktuellejährlichgezahlteZulagen" placeholder="Aktuelle jährlich gezahlte Zulagen" formControlName="aktuellejährlichgezahlteZulagen">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="anzahlderKinderdieberücksichtigtwerden">Anzahl der Kinder die berücksichtigt werden</label>
-                <input class="form-control" type="number" min="0" id="anzahlderKinderdieberücksichtigtwerden" placeholder="Anzahl der Kinder die berücksichtigt werden" formControlName="anzahlderKinderdieberücksichtigtwerden">
-            </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <h2 class="form-check-inline" for="grundzulagen">Grundzulagen</h2>
-                <input class="checkbox style-2 pull-right" type="checkbox" (change)="changecheckBox()" id="grundzulagen" formControlName="grundzulagen">
-            </div>
-        </div>
-        <div id="myZulagen" *ngIf="formModel.zulagen.grundzulagen" [@fadeInOut]>
-            <h2>Kinder</h2>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="anzahlderKinder">Anzahl der Kinder</label>
-                    <input class="form-control" type="number" min="0" placeholder="Anzahl der Kinder" id="anzahlderKinder" formControlName="anzahlderKinder">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="geburtsDatumDerKinder">Geburtsdatum der Kinder</label>
-                    <input class="form-control" type="date" placeholder="Geburtsdatum der Kinder" id="geburtsDatumDerKinder" formControlName="geburtsDatumDerKinder">
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="form-group">
-                <button class="btn btn-block btn-lg">Berechnen</button>
-            </div>
-            <div *ngIf="rentenResponse">
-                <textarea style="text-align: center" readonly>
+      </div>
+    </div>
+    <div class="container">
+      <div class="form-group">
+        <button class="btn btn-block btn-lg">Berechnen</button>
+      </div>
+      <div *ngIf="rentenResponse">
+        <textarea style="text-align: center" readonly>
           {{this.rentenResponse.summe.betrag}} {{this.waehrung}}
         </textarea>
-            </div>
-        </div>
-    </form>
-    <script src="script.js"></script>
+      </div>
+    </div>
+  </form>
 </body>
 
 </html>
