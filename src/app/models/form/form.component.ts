@@ -155,7 +155,8 @@ export class FormComponent implements OnInit {
     return this.oauthService.hasValidAccessToken();
   }
 
-  changeEndpoint(endpoint: Endpoint){
+  changeEndpoint(endpoint: Endpoint, newLabel: string){
+    this.chosenSupplier = newLabel;
     this.rentenService.changeEndpoint(endpoint);
   }
 
