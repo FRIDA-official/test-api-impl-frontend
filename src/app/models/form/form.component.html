@@ -38,9 +38,9 @@
         {{chosenSupplier}}
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 1'">Versicherer 1</button>
-        <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 2'">Versicherer 2</button>
-        <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 3'">Versicherer 3</button>
+        <button class="dropdown-item" type="button" (click)="this.changeEndpoint(Endpoint.Hannoversche)">Hannoversche</button>
+        <button class="dropdown-item" type="button" (click)="this.changeEndpoint(Endpoint.VersichererverbandLangen)">Versichererverband Langen</button>
+        <!-- <button class="dropdown-item" type="button" (click)="chosenSupplier = 'Versicherer 3'">Versicherer 3</button>  --> 
       </div>
     </div>
     <h2>Allgemeine Vertragsinformationen</h2>

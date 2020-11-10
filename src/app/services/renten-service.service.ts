@@ -39,4 +39,13 @@ export class RentenServiceService {
 
     return this.http.post(this.baseUrl+"/RentenKalkulation", formModel);
   }
+
+  public changeEndpoint(endpoint: Endpoint){
+    this.baseUrl = endpoint.valueOf();
+  }
+}
+
+export enum Endpoint {
+  Hannoversche = "https://test-api-impl-backend-jaxrs.herokuapp.com/v2",
+  VersichererverbandLangen = "http://google.de" // Bitte hier pflegen waldemar!
 }
