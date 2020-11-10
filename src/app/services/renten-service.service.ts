@@ -15,11 +15,11 @@ const httpOptions = {
 })
 export class RentenServiceService {
 
-  private baseUrl:string;
+  private chosenEndpoint: Endpoint;
 
 
   constructor(private http : HttpClient, public oauthService: OAuthService) {
-    this.baseUrl = 'https://test-api-impl-backend-jaxrs.herokuapp.com/v2';
+    this.chosenEndpoint = Endpoint.Hannoversche;
     //this.baseUrl = 'http://localhost:8080/rest/v2';
   }
 
@@ -37,11 +37,15 @@ export class RentenServiceService {
       'Access-Control-Allow-Headers': 'authorization'
   });
 
-    return this.http.post(this.baseUrl+"/RentenKalkulation", formModel);
+    return this.http.post(this.chosenEndpoint.valueOf()+"/RentenKalkulation", formModel);
   }
 
   public changeEndpoint(endpoint: Endpoint){
-    this.baseUrl = endpoint.valueOf();
+    this.chosenEndpoint = endpoint;
+  }
+
+  public getChosenEndpoint(): Endpoint{
+    return this.chosenEndpoint;
   }
 }
 
