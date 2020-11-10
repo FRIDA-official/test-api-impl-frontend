@@ -2,7 +2,7 @@ import { AuthConfig } from 'angular-oauth2-oidc';
 
 export const authCodeFlowConfig: AuthConfig = {
   // Url of the Identity Provider
-  issuer: 'https://frida-demo.okta.com',
+  issuer: 'https://frida-demo.okta.com/oauth2/default',
 
   // URL of the SPA to redirect the user to after login
   redirectUri: window.location.origin,
@@ -14,7 +14,7 @@ export const authCodeFlowConfig: AuthConfig = {
   // The first four are defined by OIDC. 
   // Important: Request offline_access to get a refresh token
   // The api scope is a usecase specific one
-  scope: 'openid profile email',
+  scope: 'openid profile email RenteKalkulieren',
 
   responseType: 'code',
 
