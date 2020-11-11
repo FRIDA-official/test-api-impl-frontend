@@ -51,5 +51,5 @@ export class RentenServiceService {
 
 export enum Endpoint {
   Hannoversche = "https://test-api-impl-backend-jaxrs.herokuapp.com/v2",
-  VersichererverbandLangen = "http://google.de" // Bitte hier pflegen waldemar!
+  VersichererverbandLangen = "https://test-api-impl-backend-nodjs.herokuapp.com/v2" // Bitte hier pflegen waldemar!
 }
