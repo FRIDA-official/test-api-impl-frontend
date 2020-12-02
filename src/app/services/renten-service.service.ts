@@ -37,7 +37,9 @@ export class RentenServiceService {
       'Access-Control-Allow-Headers': 'authorization'
   });
 
-    return this.http.post(this.chosenEndpoint.valueOf()+"/RentenKalkulation", formModel);
+    return this.http.post(this.chosenEndpoint.valueOf()+"/RentenKalkulation", formModel, {
+      headers: httpHeaders
+    });
   }
 
   public changeEndpoint(endpoint: Endpoint){
@@ -51,5 +53,5 @@ export class RentenServiceService {
 
 export enum Endpoint {
   Hannoversche = "https://test-api-impl-backend-jaxrs.herokuapp.com/v2",
-  VersichererverbandLangen = "https://test-api-impl-backend-nodjs.herokuapp.com/v2" // Bitte hier pflegen waldemar!
+  VersichererverbandLangen = "https://test-api-impl-backend-nodjs.herokuapp.com/v2",
 }
