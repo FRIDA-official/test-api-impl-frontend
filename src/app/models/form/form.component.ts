@@ -29,6 +29,7 @@ export class FormComponent implements OnInit {
   form: FormGroup;
   formData: FormData;
   public rentenResponse: any;
+  public error: any;
   public waehrung;
   public chosenSupplier = "Anbieter";
   public Endpoint: typeof Endpoint = Endpoint;
@@ -132,10 +133,29 @@ export class FormComponent implements OnInit {
   }
   getRentenInfo()
   {
-    this.rentenService.getRente(this.submitForm()).subscribe((res) => {
+    this.rentenService.getRente(this.submitForm()).subscribe((res: any) => {
+    console.log(res);
+    if(!res.summe){
+      this.handleError(res);
+    } else {
+      this.handleSuccess(res);
+    }
+    });
+  }
+
+  handleError(res){
+    // for now only Auth
+    this.error = {
+      code: 401,
+      detail: "Die Berechtigungen sind nicht ausreichend."
+    }
+  }
+
+  handleSuccess(res){
+    this.error = null;
+
     this.rentenResponse = res;
     this.waehrung = this.rentenResponse.summe.währung;
-    });
   }
   
   changeChosenSupplier(supplier:string)
@@ -153,6 +173,10 @@ export class FormComponent implements OnInit {
 
   hasValidToken(): Boolean {
     return this.oauthService.hasValidAccessToken();
+  }
+
+  hasError(){
+    return this.error != null;
   }
 
   changeEndpoint(endpoint: Endpoint, newLabel: string){

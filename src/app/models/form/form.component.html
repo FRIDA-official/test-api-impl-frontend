@@ -31,6 +31,9 @@
     <div *ngIf="!hasValidToken()" class="alert alert-danger" role="alert">
       Sie sind für die Kalkulation nicht berechtigt! Bitte loggen sie sich vorher ein.
     </div>
+    <div *ngIf="hasError()" class="alert alert-danger" role="alert">
+      <b>Fehler bei der Rentenkalkulation. </b> {{error.detail}}
+    </div>
     <h2>Anbieter</h2>
     <div class="btn-group dropright">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
