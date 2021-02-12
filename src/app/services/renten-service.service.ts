@@ -22,7 +22,7 @@ export class RentenServiceService {
     this.chosenEndpoint = Endpoint.Hannoversche;
     //this.baseUrl = 'http://localhost:8080/rest/v2';
   }
-
+/* Die Base URL für die einzelnen Versicherer kann nach Wunsch verändert werden*/
   public getRente(formModel: any) {
     console.log(this.oauthService.getAccessToken());
     console.log(this.oauthService.getIdToken());

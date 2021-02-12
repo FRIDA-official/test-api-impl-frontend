@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Form, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Endpoint, RentenServiceService } from 'src/app/services/renten-service.service'
 import { FormModel } from './form-Model';
-import {style, state, animate, transition, trigger, AnimationTriggerMetadata} from '@angular/animations';
+import { style, animate, transition, trigger} from '@angular/animations';
 import { OAuthService } from 'angular-oauth2-oidc';
 @Component({
   selector: 'app-form',
@@ -33,7 +34,6 @@ export class FormComponent implements OnInit {
   public waehrung;
   public chosenSupplier = "Anbieter";
   public Endpoint: typeof Endpoint = Endpoint;
-
 
   constructor(public formModel: FormModel, public rentenService: RentenServiceService, public oauthService: OAuthService) {
     this.formModel = new FormModel();
@@ -157,10 +157,11 @@ export class FormComponent implements OnInit {
     this.rentenResponse = res;
     this.waehrung = this.rentenResponse.summe.währung;
   }
-  
+
   changeChosenSupplier(supplier:string)
   {
     this.chosenSupplier = supplier;
+
   }
 
   login() {
